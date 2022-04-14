@@ -1,0 +1,150 @@
+<div class="container">
+   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="row mb-3">
+         <label for="name" class="col-sm-2 col-form-label">Name</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control mt-10" placeholder="Enter your name..." formControlName="name"
+               id="name">
+            <span *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched">*Please enter name </span>
+         </div>
+      </div>
+
+      <div class="row mb-3">
+         <label for="email" class="col-sm-2 col-form-label">Email</label>
+         <div class="col-sm-10">
+            <input type="email" class="form-control" placeholder="Enter your email..." formControlName="email"
+               id="email">
+            <!-- <span class="errorCheck" *ngIf="email && email?.touched && email.invalid">*Please enter email or valid
+               email</span> -->
+               <span class="errorCheck" *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">*Please enter email or valid
+                  email</span>
+
+         </div>
+      </div>
+      <div class="row mb-3">
+         <label for="mobile" class="col-sm-2 col-form-label">Mobile</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Enter your number..." formControlName="mobile"
+               id="mobile">
+           <!--  <span class="errorCheck" *ngIf="mobile && mobile?.touched && mobile.invalid">*Please enter number or valid
+               number</span> -->
+               <span class="errorCheck" *ngIf="userForm.controls['mobile'].invalid && userForm.controls['mobile'].touched">*Please enter number or valid
+                  number</span>
+
+         </div>
+      </div>
+      <fieldset class="row mb-3">
+         <legend class="col-form-label col-sm-2 float-sm-left pt-0">Gender</legend>
+         <div class="col-sm-10">
+            <div class="form-check">
+               <input class="form-check-input" type="radio" name="gender" formControlName="gender" id="gridRadios1"
+                  value="male">
+               <label class="form-check-label" for="gridRadios1">
+                  Male
+               </label>
+            </div>
+            <div class="form-check">
+               <input class="form-check-input" type="radio" name="gender" formControlName="gender" id="gridRadios2"
+                  value="female">
+               <label class="form-check-label" for="gridRadios2">
+                  Female
+               </label>
+            </div>
+            <!-- <span class="errorCheck" *ngIf="gender && gender.invalid && gender.touched">*Gender is mandatory</span> -->
+            <span class="errorCheck" *ngIf="userForm.controls['gender'].invalid && userForm.controls['gender'].touched">*Gender is mandatory</span>
+
+         </div>
+      </fieldset>
+
+      <div class="form-group col-md-4">
+
+         <label for="inputState">Category</label>
+         <select id="category" class="form-select" formControlName="category">
+            <option value="Choose..." selected>Choose...</option>
+            <option value="general"> General</option>
+            <option value="sc/st">SC/ST</option>
+            <option value="obc">OBC</option>
+         </select>
+
+      </div>
+
+      <div class="form-group row">
+
+         <label for="technology" class="col-sm-2 col-form-label">Technology</label>
+
+         <div class="col-sm-10 d-inline-flex align-items-lg-center align-items-md-center flex-column flex-sm-row">
+
+            <div *ngFor="let tech of technology">
+
+               <div class="form-check form-check-inline">
+
+                  <input class="form-check-input" type="checkbox" [value]="tech.id"
+                     (change)="onCheckBoxChange($event)" />
+
+                  <label class="form-check-label nonBoldLabel">{{
+
+                     tech.name
+
+                     }}</label>
+
+               </div>
+
+            </div>
+
+         </div>
+
+      </div>
+
+
+      <div class="form-group row">
+
+         <label for="pic" class="col-sm-2 col-form-label">Profile Picture</label>
+
+         <div class="col-sm-10">
+
+            <input type="file" accept="image/*" class="form-control" id="pic" (change)="imageUpload($event)" />
+
+         </div>
+
+      </div>
+
+
+      <div class="form-group row">
+         <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+               data-bs-target="#exampleModal">Preview</button>
+         </div>
+      </div>
+
+   </form>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirm Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div>Name : {{userForm.value.name}}</div>
+            <div>Email :{{userForm.value.email}}</div>
+            <div>Mobile : {{userForm.value.mobile}}</div>
+            <div>Gender : {{userForm.value.gender}}</div>
+            <div>Category : {{userForm.value.category}}</div>
+            <div>Technology : {{userForm.value.technology}}</div>
+            <div>Profile pic :</div>
+            <img [src]="profile" alt="">
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="addDatas()">Save changes</button>
+         </div>
+      </div>
+   </div>
+</div>

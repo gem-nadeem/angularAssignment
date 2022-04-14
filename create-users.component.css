@@ -1,0 +1,21 @@
+
+
+.container{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top:10px ;
+}
+img{
+    width: 150px;
+    height: 150px;
+}
+
+.errorCheck{
+  color: red;
+}
+
+.modal-header{
+    background-color: blueviolet;
+    
+}
